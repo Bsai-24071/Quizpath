@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "59506333605",
+    "firebase_url": "https://quizpath-3aa0d-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "quizpath-3aa0d",
+    "storage_bucket": "quizpath-3aa0d.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:59506333605:android:faa4fe39a03f248e69fa4c",
+        "android_client_info": {
+          "package_name": "com.quizpath.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAfGaWaHcdmFFTuYum6SflKZfhWmA8k8uE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,67 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Users collection
+    match /users/{userId} {
+      // Allow users to read their own document and other users' public info
+      allow read: if request.auth != null;
+      
+      // Allow authenticated users to create user documents (for signup and friend search auto-creation)
+      allow create: if request.auth != null;
+      
+      // Allow users to update their own document (including online status)
+      allow update: if request.auth != null && request.auth.uid == userId;
+      
+      // Allow users to delete their own document
+      allow delete: if request.auth != null && request.auth.uid == userId;
+      
+      // Friends subcollection
+      match /friends/{friendId} {
+        allow read: if request.auth != null && request.auth.uid == userId;
+        allow write: if request.auth != null && request.auth.uid == userId;
+        // Allow adding friends when accepting friend request (other user adds you to their friends)
+        allow create: if request.auth != null;
+      }
+      
+      // Friend requests subcollection
+      match /friendRequests/{requestId} {
+        allow read: if request.auth != null && request.auth.uid == userId;
+        allow write: if request.auth != null && request.auth.uid == userId;
+        // Allow any authenticated user to create friend requests
+        allow create: if request.auth != null;
+      }
+      
+      // Match challenges subcollection
+      match /matchChallenges/{challengeId} {
+        // Allow reading own challenges AND challenges where you are the challenger
+        allow read: if request.auth != null && 
+          (request.auth.uid == userId || request.auth.uid == challengeId);
+        // Allow users to update/delete their own challenges OR if they are the challenger (challengeId)
+        allow write: if request.auth != null && (request.auth.uid == userId || request.auth.uid == challengeId);
+        // Allow any authenticated user to create challenges
+        allow create: if request.auth != null;
+      }
+      
+      // Match history subcollection (for aptitude tracking)
+      match /matchHistory/{matchId} {
+        allow read: if request.auth != null && request.auth.uid == userId;
+        allow write: if request.auth != null && request.auth.uid == userId;
+      }
+      
+      // Aptitude results subcollection
+      match /aptitude/{category} {
+        allow read: if request.auth != null && request.auth.uid == userId;
+        allow write: if request.auth != null && request.auth.uid == userId;
+      }
+    }
+    
+    // Matches collection
+    match /matches/{matchId} {
+      allow read: if request.auth != null && 
+        (resource.data.player1 == request.auth.uid || resource.data.player2 == request.auth.uid);
+      allow create: if request.auth != null;
+      allow update: if request.auth != null && 
+        (resource.data.player1 == request.auth.uid || resource.data.player2 == request.auth.uid);
+    }
+  }
+}
