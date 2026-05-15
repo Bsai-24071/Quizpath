@@ -161,15 +161,10 @@ See [`firestore.rules`](./firestore.rules) for the full rule set.
 
 ## 🌐 API Used
 
-QuizPath fetches trivia questions from the free **[Open Trivia Database](https://opentdb.com/)** — no API key required. Questions are fetched per-session in the selected category and difficulty.
+QuizPath fetches trivia questions from the free **[Open Trivia Database](https://opentdb.com/)**. Questions are fetched per-session in the selected category and difficulty.
 
 ---
 
-## 📸 Screenshots
-
-> *Coming soon — UI screenshots and a demo GIF will be added here.*
-
----
 
 ## 🤔 Why I Built This
 
@@ -186,7 +181,7 @@ It's not just a quiz app. It's a playground for everything I've learned about bu
 ## 👨‍💻 Author
 
 **Bsai-24071**  
-Computer Science Student  
+Artifical Intelligence Student  
 
 [![GitHub](https://img.shields.io/badge/GitHub-Bsai--24071-181717?style=flat&logo=github)](https://github.com/Bsai-24071)
 
